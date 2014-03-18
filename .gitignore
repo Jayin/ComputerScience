@@ -13,4 +13,8 @@
 *.a
 
 # Dev C++
-*.dev
+*.dev+
+*.o
+Makefile.win
+*.exe
+*.layout
