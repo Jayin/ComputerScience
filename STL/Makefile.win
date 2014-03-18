@@ -1,0 +1,29 @@
+# Project: Project1
+# Makefile created by Dev-C++ 5.4.1
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = ListTest.o
+LINKOBJ  = ListTest.o
+LIBS     = -L"D:/DEV-CPP/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"D:/DEV-CPP/MinGW64/x86_64-w64-mingw32/include"
+CXXINCS  = -I"D:/DEV-CPP/MinGW64/x86_64-w64-mingw32/include"
+BIN      = stltest.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+RM       = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+ListTest.o: ListTest.cpp
+	$(CPP) -c ListTest.cpp -o ListTest.o $(CXXFLAGS)
