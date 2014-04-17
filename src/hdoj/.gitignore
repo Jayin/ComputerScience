@@ -18,8 +18,3 @@
 Makefile.win
 *.exe
 *.layout
-
-#eslipse
-.cproject
-.project
-.settings
