@@ -1,4 +1,3 @@
-
 #ifndef LINKLIST_H_
 #define LINKLIST_H_
 
@@ -18,15 +17,14 @@ public:
 	~SimpleLinkList();
 	int Length();
 	int Locate(T t); //return -1 if not exist
-	T Get(int position);//start from 0
-	void Insert(int position,T t);//start from 0
-	void Delete(int position);//start from 0
-	void PrintList();
+	T Get(int position); //start from 0
+	void Insert(int position, T t); //start from 0
+	void Delete(int position); //start from 0
+	void PrintList(); //有点不严谨
 private:
 	Node<T> *first;
 	Node<T>* GetNode(int positon);
 };
-
 
 template<class T>
 SimpleLinkList<T>::SimpleLinkList() {
@@ -36,8 +34,11 @@ SimpleLinkList<T>::SimpleLinkList() {
 
 template<class T>
 SimpleLinkList<T>::~SimpleLinkList() {
-	first = new Node<T>;
-	first->next = NULL;
+	if (Length() > 0) {
+		for (int i = Length() - 1; i >= 0; i--) {
+			Delete(i);
+		}
+	}
 }
 
 template<class T>
@@ -76,7 +77,6 @@ T SimpleLinkList<T>::Get(int i) {
 	}
 	return p->data;
 }
-
 
 template<class T>
 Node<T> *SimpleLinkList<T>::GetNode(int i) {
@@ -119,11 +119,11 @@ void SimpleLinkList<T>::Delete(int position) {
 		throw "index out of bound";
 	}
 	Node<T> *tmp = NULL;
-	if(position == 0){
+	if (position == 0) {
 		tmp = first->next;
 		first->next = tmp->next;
-	}else{
-		Node<T> *p  = GetNode(position-1);
+	} else {
+		Node<T> *p = GetNode(position - 1);
 		tmp = p->next;
 		p->next = tmp->next;
 	}
@@ -131,13 +131,13 @@ void SimpleLinkList<T>::Delete(int position) {
 }
 
 template<class T>
-void SimpleLinkList<T>::PrintList(){
+void SimpleLinkList<T>::PrintList() {
 	Node<T> *p = first->next;
-	cout<<"List:"<<endl;
-	while(p){
-		cout<<p->data<<" ";
+	cout << "List:" << endl;
+	while (p) {
+		cout << p->data << " ";
 		p = p->next;
 	}
-	cout<<endl;
+	cout << endl;
 }
 #endif /* LINKLIST_H_ */
