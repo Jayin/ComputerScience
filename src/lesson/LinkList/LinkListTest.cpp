@@ -1,4 +1,4 @@
-#include "h/LinkList.h"
+#include "LinkList.h"
 #include <iostream>
 #include <assert.h>
 using namespace std;
