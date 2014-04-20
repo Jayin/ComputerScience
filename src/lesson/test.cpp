@@ -1,21 +1,15 @@
-#include "h/SimpleLinkList.h"
+#include "h/LinkList.h"
 #include <iostream>
 #include <assert.h>
 using namespace std;
 
 
-int main(){
-
-  LinkList l;
-  l.add(1);
-  l.add(2);
-  l.add(3);
-  cout<<l.length()<<endl;
-  cout<<"first="<<l.getFirst()<<endl;
-  l.print_list();
-  l.pop();
-  l.print_list();
-  l.pop();
-  l.print_list();
+int main() {
+	SimpleLinkList<int> l;
+	l.Insert(0,1);
+	l.PrintList();
+	l.Delete(0);
+	l.PrintList();
 
 }
+
