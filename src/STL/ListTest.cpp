@@ -73,12 +73,12 @@ void merge(){
   std::cout << '\n';
 }
 
-int main(){
-	
-	init();
-    //resize();
-   // megery();
-    return 0;	
-} 
+//int main(){
+//
+//	init();
+//    //resize();
+//   // megery();
+//    return 0;
+//}
 
 
