@@ -33,9 +33,9 @@ void push(){
 	cout<<"test pass"<<endl;
 }
 
-
-int main(){
-	push();
-	return 0;
-}
+//
+//int main(){
+//	push();
+//	return 0;
+//}
 
