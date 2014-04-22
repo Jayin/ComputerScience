@@ -11,7 +11,6 @@ void work(){
 		    string in,out;
 		    stack<char> s;
 		    cin>>in>>out;
-		    int left = n;
 		    int numIn =0,numOut=0;
 		    while(numIn<n){
 		    	//in
