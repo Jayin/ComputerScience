@@ -41,35 +41,35 @@ template<class T> CycleQueue<T>::~CycleQueue() {
 template<class T> T CycleQueue<T>::getHead() {
 	if (isEmpty()) {
 		return NULL;
-	} else {
-		return data[font];
 	}
+	return data[font];
+
 }
 
 template<class T> T CycleQueue<T>::getRear() {
 	if (isEmpty()) {
 		return NULL;
-	} else {
-		return data[rear];
 	}
+	return data[rear];
+
 }
 
 template<class T> void CycleQueue<T>::add(T t) {
 	if (isFull()) {
 		throw "It's full";
-	} else {
-		rear = (rear + 1) % QueueSize;
-		data[rear] = t;
 	}
+	rear = (rear + 1) % QueueSize;
+	data[rear] = t;
+
 }
 
 template<class T> T CycleQueue<T>::pop() {
 	if (isEmpty()) {
 		throw "It's empty";
-	} else {
-		font = (font + 1) % QueueSize;
-		return data[font ];
 	}
+	font = (font + 1) % QueueSize;
+	return data[font];
+
 }
 
 template<class T> bool CycleQueue<T>::isEmpty() {
@@ -87,10 +87,9 @@ template<class T> int CycleQueue<T>::MaxSize() {
 template<class T> int CycleQueue<T>::Size() {
 	if (rear >= font)
 		return rear - font;
-	else {
-		return QueueSize + rear - font;
-	}
-}
 
+	return QueueSize + rear - font;
+
+}
 
 #endif /* CYCLEQUEUE_H_ */
