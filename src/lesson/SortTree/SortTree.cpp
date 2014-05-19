@@ -1,6 +1,6 @@
 /*
  * SortTree.cpp
- *
+ * inOrder 中序遍历->由小到大排序
  *  Created on: 2014年5月19日
  *      Author: Jayin Ton
  */
@@ -14,9 +14,7 @@ SortTree::SortTree() {
 SortTree::~SortTree() {
 	if (root != NULL){
 		released(root);
-		cout<<"release finish"<<endl;
 	}
-
 }
 
 void SortTree::released(Node* p) {
@@ -24,7 +22,6 @@ void SortTree::released(Node* p) {
 		return;
 	released(p->lchild);
 	released(p->rchild);
-	cout<<"release ->"<<p->data<<endl;
 	delete p;
 }
 
@@ -55,7 +52,6 @@ Node* SortTree::create(int data) {
 	node->data = data;
 	node->lchild = NULL;
 	node->rchild = NULL;
-	cout << "create ->" << node->data << endl;
 	return node;
 }
 

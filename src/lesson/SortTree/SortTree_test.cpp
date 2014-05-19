@@ -19,9 +19,9 @@ void SortTreeTest() {
 	t.inOrder();
 }
 
-int main() {
-
-	SortTreeTest();
-	return 0;
-}
-
+//int main() {
+//
+//	SortTreeTest();
+//	return 0;
+//}
+//
