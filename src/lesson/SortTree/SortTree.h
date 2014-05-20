@@ -11,10 +11,13 @@
 #include <iostream>
 using namespace std;
 
+#ifndef struct_node
+#define struct_node
 typedef struct _Node {
 	int data;
-	_Node  *lchild, *rchild;
+	_Node *lchild, *rchild;
 } Node;
+#endif
 
 class SortTree {
 public:
@@ -22,6 +25,7 @@ public:
 	virtual ~SortTree();
 	void add(int data);
 	void inOrder();
+	Node* getTree();
 private:
 	Node* root;
 	void inOrder(Node*);

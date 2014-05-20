@@ -69,3 +69,7 @@ void SortTree::inOrder(Node* p) {
 	}
 }
 
+Node* SortTree::getTree(){
+	return root;
+}
+
