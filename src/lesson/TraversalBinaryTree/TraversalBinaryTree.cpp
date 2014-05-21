@@ -27,15 +27,33 @@ void TraversalBinaryTree::PreOrder() {
 	PreOrder(root);
 }
 
+void TraversalBinaryTree::PreOrder2() {
+	PreOrder2(root);
+}
+
 void TraversalBinaryTree::PreOrder(Node* p) {
 	if (p == NULL)
 		return;
 	cout << p->data << " ";
 	PreOrder(p->lchild);
 	PreOrder(p->rchild);
-
 }
 
+void TraversalBinaryTree::PreOrder2(Node* p) {
+	Stack s;
+	while(p != NULL || !s.empty()){
+		while(p != NULL){
+			cout<<p->data<<" ";
+			s.push(p);
+			p = p->lchild;
+		}
+		if(!s.empty()){
+			p = s.top();
+			s.pop();
+			p = p->rchild;
+		}
+	}
+}
 void TraversalBinaryTree::InOrder() {
 	InOrder(root);
 }

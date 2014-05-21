@@ -25,6 +25,10 @@ void TraversalBinaryTreetest() {
 	tree->PreOrder();
 	cout << endl;
 
+	cout << "PreOrder2" << endl;
+		tree->PreOrder2();
+		cout << endl;
+
 	cout << "InOrder" << endl;
 	tree->InOrder();
 	cout << endl;
