@@ -41,13 +41,13 @@ void TraversalBinaryTree::PreOrder(Node* p) {
 
 void TraversalBinaryTree::PreOrder2(Node* p) {
 	Stack s;
-	while(p != NULL || !s.empty()){
-		while(p != NULL){
-			cout<<p->data<<" ";
+	while (p != NULL || !s.empty()) {
+		while (p != NULL) {
+			cout << p->data << " ";
 			s.push(p);
 			p = p->lchild;
 		}
-		if(!s.empty()){
+		if (!s.empty()) {
 			p = s.top();
 			s.pop();
 			p = p->rchild;
@@ -58,6 +58,10 @@ void TraversalBinaryTree::InOrder() {
 	InOrder(root);
 }
 
+void TraversalBinaryTree::InOrder2() {
+	InOrder2(root);
+}
+
 void TraversalBinaryTree::InOrder(Node* p) {
 	if (p == NULL)
 		return;
@@ -66,8 +70,28 @@ void TraversalBinaryTree::InOrder(Node* p) {
 	InOrder(p->rchild);
 }
 
+void TraversalBinaryTree::InOrder2(Node* p) {
+	Stack s;
+	while (p != NULL || !s.empty()) {
+		while (p != NULL) {
+			s.push(p);
+			p = p->lchild;
+		}
+		if (!s.empty()) {
+			p = s.top();
+			cout << p->data << " ";
+			s.pop();
+			p = p->rchild;
+		}
+	}
+}
+
 void TraversalBinaryTree::PostOrder() {
 	PostOrder(root);
+}
+
+void TraversalBinaryTree::PostOrder2() {
+	PostOrder2(root);
 }
 
 void TraversalBinaryTree::PostOrder(Node* p) {
@@ -76,6 +100,27 @@ void TraversalBinaryTree::PostOrder(Node* p) {
 	PostOrder(p->lchild);
 	PostOrder(p->rchild);
 	cout << p->data << " ";
+}
+
+void TraversalBinaryTree::PostOrder2(Node* p) {
+	Stack visit, start;//typedef stack<Node*> Stack;
+	if (p != NULL)
+		start.push(p);
+	while (!start.empty()) {
+		if (!visit.empty() && start.top()->data == visit.top()->data) {
+			cout << visit.top()->data << " ";//visit that point
+			start.pop(),visit.pop();
+		} else {
+			Node* tmp = start.top();
+			visit.push(tmp);
+			if (tmp->rchild != NULL) {
+				start.push(tmp->rchild);
+			}
+			if (tmp->lchild != NULL) {
+				start.push(tmp->lchild);
+			}
+		}
+	}
 }
 
 void makeEmpty(queue<Node*> &q) {
