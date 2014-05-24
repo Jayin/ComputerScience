@@ -31,6 +31,23 @@ void simplehash() {
 	cout << hash_fnv1a("json", 100) << endl;
 	cout << hash_fnv1a("jsp", 100) << endl;
 	cout << hash_fnv1a("Tim Kong", 100) << endl;
+
+	cout << "===BKDRHash====" << endl;
+	cout << BKDRHash("mars") << endl;
+	cout << BKDRHash("mars") << endl;
+	cout << BKDRHash("json") << endl;
+	cout << BKDRHash("jsp") << endl;
+	cout << BKDRHash("Tim Kong") << endl;
+
+	cout << "===APHash====" << endl;
+	cout << APHash("mars") << endl;
+	cout << APHash("mars") << endl;
+	cout << APHash("json") << endl;
+	cout << APHash("jsp") << endl;
+	cout << APHash("Tim Kong") << endl;
+
+	cout << endl;
+	cout << "Max int-->" << 0x7FFFFFFF << endl;
 }
 
 int main(int argc, char **argv) {
