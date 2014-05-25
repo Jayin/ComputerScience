@@ -50,7 +50,7 @@ void simplehash() {
 	cout << "Max int-->" << 0x7FFFFFFF << endl;
 }
 
-int main(int argc, char **argv) {
-	simplehash();
-	return 0;
-}
+//int main(int argc, char **argv) {
+//	simplehash();
+//	return 0;
+//}
