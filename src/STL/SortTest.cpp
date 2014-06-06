@@ -16,7 +16,7 @@ bool cmp(int i, int j) {
 void sortTest() {
 	int myints[] = { 32, 71, 12, 45, 26, 80, 53, 33 };
 	vector<int> myvector(myints, myints + 8);
-	sort(myvector.begin(), myvector.end(),cmp);
+	sort(myvector.begin(), myvector.end(), cmp);
 	// print out content:
 	cout << "myvector contains:";
 	for (vector<int>::iterator it = myvector.begin(); it != myvector.end();
@@ -25,15 +25,9 @@ void sortTest() {
 	cout << '\n';
 }
 
-void go(int num) {
-	cout << num << endl;
-}
+//int main() {
+//	sortTest();
+//	return 0;
+//}
 
-void (*func)(int);
-
-int main(int argc, char **argv) {
-	sortTest();
-//	(*go)(12);
-
-}
 

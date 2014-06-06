@@ -10,7 +10,7 @@
 #include <string>
 using namespace std;
 
-void simplehash() {
+static void simplehash() {
 	cout << "===simple====" << endl;
 	cout << getHashIndex("mars", 100) << endl;
 	cout << getHashIndex("mars", 100) << endl;
