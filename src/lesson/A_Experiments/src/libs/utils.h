@@ -1,10 +1,3 @@
-/*
- * utils.cpp
- *
- *  Created on: 2014��6��9��
- *      Author: Jayin Ton
- */
-
 #ifndef UTILS_H_
 #define UTILS_H_
 
