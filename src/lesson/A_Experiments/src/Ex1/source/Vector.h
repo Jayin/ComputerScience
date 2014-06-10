@@ -20,10 +20,10 @@ public:
 	//return the element by given specify position(since 0)
 	T Get(int position);
 
-	//insert the
+	//insert the element into the end of array
 	void Insert(T element);
 
-	//insert in
+	//insert the element into the given specfy postion of array
 	void Insert(int position, T element);
 
 	//delete the element by given specify position(since 0)
