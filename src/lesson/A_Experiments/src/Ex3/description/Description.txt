@@ -1,28 +1,13 @@
-实验题目一：设计与实现一个以向量作为存储结构的线性表类，该类中至少要包含对线性表的6种操作。
+实验题目三：做一个二叉树的处理学院（系统储存），具有6个功能。
+储存结构：
+lchild	data	rchild
+
 分析：
-	实际上就是实现一个动态数组——Vector
+	1.由于描述不清楚，于是按着自己思路去做了。为了简单起见，这里是处理学院的学生信息。
+	     定义学生信息：id,name,major
+	     
+	2.每次插入的时候，根据id大小插入，形成二叉排序树
 
 实现函数：
-	//get the length of array
-	int Length();
-
-	//return the element by given specify position(since 0)
-	T Get(int position);
-
-	//insert the element into the end of array
-	void Insert(T element);
-
-	//insert the element into the given specfy postion of array
-	void Insert(int position, T element);
-
-	//delete the element by given specify position(since 0)
-	void Delete(int position);
-
-	//return true if the array is empty
-	bool Empty();
-	
-补充：
-	Vector(); //default the capacity is 32
-	Vector(int capacity); //init the length of array(32)
-	
+   
 
