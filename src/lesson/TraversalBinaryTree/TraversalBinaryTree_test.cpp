@@ -53,6 +53,7 @@ void TraversalBinaryTreetest() {
 	cout << endl;
 }
 
-//int main(int argc, char **argv) {
+//int main() {
 //	TraversalBinaryTreetest();
+//	return 0;
 //}

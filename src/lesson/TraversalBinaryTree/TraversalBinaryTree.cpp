@@ -146,9 +146,9 @@ void TraversalBinaryTree::LeveOrder(Node* p) {
 	queue<Node*> q;
 	queue<Node*> tmp;
 	q.push(p);
-
+	makeEmpty(tmp);
 	while (q.size() > 0) {
-		makeEmpty(tmp);
+
 		Node* n = q.front();
 		q.pop();
 		if (n->lchild != NULL)
@@ -159,6 +159,7 @@ void TraversalBinaryTree::LeveOrder(Node* p) {
 		if (q.size() == 0) {
 			cout << endl;
 			copy(q, tmp);
+			makeEmpty(tmp);
 		}
 	}
 }

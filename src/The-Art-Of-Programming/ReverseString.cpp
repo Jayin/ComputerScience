@@ -26,13 +26,10 @@ void LeftRotateString(char *s, int n, int m) {
 	ReverseString(s, 0, n - 1); //反转[0..n - 1]，即如整个反转，(X^TY^T)^T=YX，即 cbafed->defabc。
 }
 
-#ifndef __main__
-#define __main__
-int main() {
-	char str[] = "abcdefg";
-	LeftRotateString(str, 7, 3);
-	cout << str << endl;
-	return 0;
-}
-#endif
+//int main() {
+//	char str[] = "abcdefg";
+//	LeftRotateString(str, 7, 3);
+//	cout << str << endl;
+//	return 0;
+//}
 
