@@ -1,0 +1,28 @@
+实验题目一：设计与实现一个以向量作为存储结构的线性表类，该类中至少要包含对线性表的6种操作。
+分析：
+	实际上就是实现一个动态数组——Vector
+
+实现函数：
+	//get the length of array
+	int Length();
+
+	//return the element by given specify position(since 0)
+	T Get(int position);
+
+	//insert the element into the end of array
+	void Insert(T element);
+
+	//insert the element into the given specfy postion of array
+	void Insert(int position, T element);
+
+	//delete the element by given specify position(since 0)
+	void Delete(int position);
+
+	//return true if the array is empty
+	bool Empty();
+	
+补充：
+	Vector(); //default the capacity is 32
+	Vector(int capacity); //init the length of array(32)
+	
+

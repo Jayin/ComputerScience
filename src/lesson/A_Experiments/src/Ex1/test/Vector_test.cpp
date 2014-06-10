@@ -38,7 +38,7 @@ int ex1_test() {
 	return 0;
 }
 
-int main() {
-	return ex1_test();
-}
+//int main() {
+//	return ex1_test();
+//}
 
