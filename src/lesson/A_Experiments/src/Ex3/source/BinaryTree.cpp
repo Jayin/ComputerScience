@@ -79,7 +79,7 @@ bool BinaryTree::Delete(Entity e) {
 	Node *target = Search(father, e);
 	if (target->lchild != NULL || target->rchild != NULL) {
 		if (target->lchild != NULL && target->rchild != NULL) {
-			//rebuild right
+			//two child trees & rebuild right tree
 			queue<Node*> q = GetNodes(target->rchild);
 			if (target == father->lchild) {
 				father->lchild = target->lchild;
@@ -193,13 +193,13 @@ void BinaryTree::InOrder() {
 
 void BinaryTree::PostOrder() {
 	Node* p = root;
-	Stack visit, start; //typedef stack<Node*> Stack;
+	Stack visit, start;
 	if (p != NULL)
 		start.push(p);
 	while (!start.empty()) {
 		if (!visit.empty()
 				&& start.top()->data.getId() == visit.top()->data.getId()) {
-			cout << visit.top()->data.getId() << " "; //visit that point
+			cout << visit.top()->data.getId() << " ";
 			start.pop(), visit.pop();
 		} else {
 			Node* tmp = start.top();

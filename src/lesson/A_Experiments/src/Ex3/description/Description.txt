@@ -52,12 +52,16 @@ private:
 	//Insert entity sorted by id
 	Node* Insert(Node *p, Entity e);
 
-	//return the father Node of entity on the tree
+	//return the Node of entity on the tree
 	//return NULL if not exist
 	Node* Search(Node *p, Entity e);
 
+	//return the father Node of entity on the tree
+	//return NULL if not exist
 	Node* SearchFather(Entity e);
-
+	
+	//return the father Node of entity on the tree
+	//return NULL if not exist
 	Node* SearchFather(Node *p, Entity e);
 
 	//release the tree
