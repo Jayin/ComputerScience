@@ -8,11 +8,12 @@ using namespace std;
 void ex3_test_insert();
 void ex3_test_depth();
 #include <stdlib.h>
-int main() {
+
+//int main() {
 //	ex3_test_depth();
-	ex3_test_insert();
-	return 0;
-}
+//	ex3_test_insert();
+//	return 0;
+//}
 
 void ex3_test_depth() {
 	Entity e1(3, "Jayin", "CS"), e2(1, "Tom", "CS"), e3(2, "Mars", "CS"), e4(5,
