@@ -7,7 +7,7 @@ using namespace std;
 
 void ex3_test_insert();
 void ex3_test_depth();
-
+#include <stdlib.h>
 int main() {
 //	ex3_test_depth();
 	ex3_test_insert();
@@ -62,7 +62,49 @@ void ex3_test_insert() {
 	_::d("--END--");
 	_::d("");
 
+	_::d("--Search Test--");
+	Node *p = tree.Search(e5);
+	Entity e10(11, "Peter", "CS");
+	_::d("");
+	assert(p->data.getId() == e5.getId());
+	_::d("");
+	_::d("--Search pass END--");
+	_::d("");
+
+	_::d("");
+	p = tree.Search(e10);
+	assert(NULL == p);
+	_::d("");
+	_::d("--test pass END--");
+	_::d("");
+
+	_::d("--Depth Test--");
 	assert(5 == tree.Depth());
+	_::d("");
+	_::d("--tree.Depth() test pass END--");
+	_::d("");
+
+	_::d("--Search Test--");
+	queue<Node*> q = tree.GetNodes();
+	while (q.size() != 0) {
+		cout << q.front()->data.getId() << " ";
+		q.pop();
+	}
+	_::d("");
+	_::d("--tree.Depth() test pass END--");
+	_::d("");
+
+	_::d("--Delete Test--");
+	tree.Delete(e4); //e2
+	_::d("--Delete test pass END--");
+	_::d("");
+	// to check if the id(5) had been delete
+	_::d("--InOrder--");
+	tree.InOrder();
+	_::d("");
+	_::d("--END--");
+	_::d("");
+
 	_::d("finish");
 }
 

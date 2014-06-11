@@ -5,7 +5,6 @@
 #include <stack>
 using namespace std;
 
-
 typedef struct _node {
 	Entity data;
 	struct _node *lchild, *rchild;
@@ -22,10 +21,15 @@ public:
 	void Insert(Entity e);
 
 	//delete given entity on the tree
-	void Delete(Entity e);
+	//return false if delete faild
+	bool Delete(Entity e);
 
 	//return the depth of the binary tree
 	int Depth();
+
+	//return the Node of entity on the tree
+	//return NULL if not exist
+	Node* Search(Entity e);
 
 	//print the binary tree in PreOrder
 	void PreOrder();
@@ -39,16 +43,31 @@ public:
 	//print the binary tree in LeveOrder
 	void LeveOrder();
 
+	//return all son nodes of under the node-p of the tree
+	queue<Node*> GetNodes();
+
 private:
 	Node *root;
 
 	//Insert entity sorted by id
-	Node* Insert(Node *p,Entity e);
+	Node* Insert(Node *p, Entity e);
+
+	//return the father Node of entity on the tree
+	//return NULL if not exist
+	Node* Search(Node *p, Entity e);
+
+	Node* SearchFather(Entity e);
+
+	Node* SearchFather(Node *p, Entity e);
 
 	//release the tree
 	void Released(Node *p);
 
+	//create one Node
 	Node* create(Entity e);
+
+	//return all nodes of under the node-p of the tree
+	queue<Node*> GetNodes(Node *p);
 
 };
 

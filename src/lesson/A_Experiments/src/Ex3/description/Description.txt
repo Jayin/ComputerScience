@@ -8,11 +8,64 @@ lchild	data	rchild
 	     
 	2.每次插入的时候，根据id大小插入，形成二叉排序树(根据id)
 	
-	3.删除一学生信息(结点)，总是让孩子结点顶替上父结点位置；
-	      如有2个子节点，则考虑左节点顶上，右子树重构
+	3.支持查找
+	
+	4.删除一学生信息(结点)，总是让孩子结点顶替上父结点位置；
+	      如有2个子节点，则考虑左节点顶上，右子树重构(把有子树重新插入到该二叉树中)
 	      
-	4.二叉树的四种遍历方式采用非递归，用栈和队列模拟
+	5.二叉树的四种遍历方式采用非递归(按指定的遍历方式输出每个学生的id)，用栈和队列模拟
 
 实现函数：
-   
+ public:
+	//Insert entity sorted by id
+	void Insert(Entity e);
+
+	//delete given entity on the tree
+	//return false if delete faild
+	bool Delete(Entity e);
+
+	//return the depth of the binary tree
+	int Depth();
+
+	//return the Node of entity on the tree
+	//return NULL if not exist
+	Node* Search(Entity e);
+
+	//print the binary tree in PreOrder
+	void PreOrder();
+
+	//print the binary tree in InOrder
+	void InOrder();
+
+	//print the binary tree in PostOrder
+	void PostOrder();
+
+	//print the binary tree in LeveOrder
+	void LeveOrder();
+
+	//return all son nodes of under the node-p of the tree
+	queue<Node*> GetNodes();
+
+private:
+	Node *root;
+
+	//Insert entity sorted by id
+	Node* Insert(Node *p, Entity e);
+
+	//return the father Node of entity on the tree
+	//return NULL if not exist
+	Node* Search(Node *p, Entity e);
+
+	Node* SearchFather(Entity e);
+
+	Node* SearchFather(Node *p, Entity e);
+
+	//release the tree
+	void Released(Node *p);
+
+	//create one Node
+	Node* create(Entity e);
+
+	//return all nodes of under the node-p of the tree
+	queue<Node*> GetNodes(Node *p);
 
