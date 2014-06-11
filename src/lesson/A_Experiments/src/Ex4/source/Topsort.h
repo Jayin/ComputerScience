@@ -76,7 +76,7 @@ bool solve(Point* points) {
 		return false;
 	while (!q.empty()) {
 		Point p = q.front();
-		p.println();
+//		p.println();
 		list<int> l = p.getEdges();
 		q.pop();
 		out++;
@@ -93,7 +93,12 @@ bool solve(Point* points) {
 }
 
 Point* input() {
-	cin >> m >> n;
+	while(cin >> m >> n){
+		if(m>0 && n >= 0)
+			break;
+		else
+			cout<<"the range is :m>0 and n >=0"<<endl;
+	}
 	Point *points = new Point[m+1];
 	for (int i = 1; i <= n; i++) {
 		int a, b;
