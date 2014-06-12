@@ -8,11 +8,11 @@ void swap(int &x, int &y) {
 }
 
 void quick_sort(int *array, int left, int right) {
-	int i = left, j = right, mid = (left + right) / 2;
+	int i = left, j = right, mid = array[(left + right) / 2];
 	do {
-		while (i < right && array[i] < array[mid])
+		while (i < right && array[i] < mid)
 			i++;
-		while (j > left && array[j] > array[mid])
+		while (j > left && array[j] > mid)
 			j--;
 		if (i <= j) {
 			swap(array[i], array[j]);
