@@ -7,16 +7,22 @@ using namespace std;
  * @param length:数组长度
  * @param from,to:残生随机数范围[from,to]
  */
-void test_quick_sort(const char* filename,int length, int from, int to);
+void test_quick_sort(const char* filename, int length, int from, int to);
 
 void create_file();
 
-void test(){
-  int x = _::stringtoi("123456");
-  cout<<x<<endl;
-  const char* a = _::stringcat("name:","jackson");
-  cout<<a<<endl;
+void test() {
+	int x = _::stringtoi("123456");
+	cout << x << endl;
+	const char* a = _::stringcat("name:", "jackson");
+	cout << a << endl;
+	const char* s = _::itostirng(0);
+	cout << s << endl;
+	s = _::itostirng(-0);
+	cout << s << endl;
 
+	s =_::itostirng(+1234);
+	  cout<<s<<endl;
 
 }
 int main() {
@@ -36,25 +42,25 @@ void create_file() {
 }
 
 void test_quick_sort(const char* filename, int length, int from, int to) {
-    cout<<"----test "<<filename<<" ----"<<endl;
+	cout << "----test " << filename << " ----" << endl;
 	ifstream fin;
 	ofstream fout;
 	fin.open(filename, ifstream::in);
 //	fout.open(_::stringcat(filename,))
 	int *a = new int[length];
-	cout<<"file read:"<<endl;
-	for(int i=0;i<length;i++){
-		fin>>a[i];
-		cout<<a[i]<<" ";
+	cout << "file read:" << endl;
+	for (int i = 0; i < length; i++) {
+		fin >> a[i];
+		cout << a[i] << " ";
 	}
 	fin.close();
-	cout<<"\nfile read  end"<<endl;
+	cout << "\nfile read  end" << endl;
 	quick_sort(a, 0, length - 1);
-	cout<<"\nsort result:"<<endl;
+	cout << "\nsort result:" << endl;
 	for (int i = 0; i < length; i++) {
 		cout << a[i] << " ";
 	}
 	cout << endl;
-	cout<<"----END ----"<<endl;
+	cout << "----END ----" << endl;
 }
 
