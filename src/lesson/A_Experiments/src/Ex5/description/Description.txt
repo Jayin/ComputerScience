@@ -3,7 +3,12 @@
 	交换排序：冒泡排序
 
 分析：
-	 
+	 快速排序O(log2(N))
+	冒泡排序O(N^2) 
 
 实现函数：
- 
+ 	see:source/Sort.h
+ 	
+测试：
+	see:test/sort_test.cpp
+	在sort_test_main()中分别删除要测试的组别的注释

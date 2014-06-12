@@ -26,4 +26,14 @@ void quick_sort(int *array, int left, int right) {
 		quick_sort(array, left, j);
 }
 
+void pop_sort(int *array, int length){
+	for(int i=0;i<length;i++){
+		for(int j=i+1;j<length;j++){
+			if(array[i]>array[j]){
+				swap(array[i],array[j]);
+			}
+		}
+	}
+}
+
 #endif /* QUICKSORT_H_ */
