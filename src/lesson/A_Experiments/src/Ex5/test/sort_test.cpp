@@ -25,11 +25,17 @@ void test() {
 	  cout<<s<<endl;
 
 }
-int main() {
-//	test();
-	sort_test_main();
-	return 0;
-}
+//////////////////
+// Main         //
+//////////////////
+
+//int main() {
+//	sort_test_main();
+//	return 0;
+//}
+
+
+
 void sort_test_main(){
 	create_file();
 
