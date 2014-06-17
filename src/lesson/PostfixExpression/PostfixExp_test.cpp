@@ -1,10 +1,3 @@
-/*
- * PostfixExp_test.cpp
- *
- *  Created on: 2014年6月16日
- *      Author: Jayin Ton
- */
-
 #include "PostfixExp.h"
 #include <iostream>
 #include <cstdio>

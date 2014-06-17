@@ -1,6 +1,8 @@
 ### 完成：
 输入一表达式例如"0.3/(5*2+1)=",先输出其后缀表达式，然后计算结果.
 
+### 测试
+运行 `PostfixExp_test.cpp`
 
 ### what is Postfix expression(后缀表达式)?
 

@@ -1,10 +1,3 @@
-/*
- * PostfixExp.h
- *
- *  Created on: 2014年6月16日
- *      Author: Jayin Ton
- */
-
 #ifndef POSTFIXEXP_H_
 #define POSTFIXEXP_H_
 
@@ -27,16 +20,16 @@ static int get_level(char c) {
 		return 0;
 	else if (c == '+' || c == '-')
 		return 1;
-	else
+	else // `*` and `/`
 		return 2;
 }
-
+// 输出后缀表达式
 static string get_postfixExp() {
 	string raw = input();
 	int len = raw.size();
 	stack<char> opt;
 	vector<string> res;
-	string tmp; //保存一个数
+	string tmp;
 	string result;
 	for (int i = 0; i < len; i++) {
 
@@ -86,6 +79,7 @@ static string get_postfixExp() {
 	return result;
 }
 
+// helper for debug
 static void print(vector<double> res, stack<char> opt) {
 	cout << "res-->";
 	for (vector<double>::iterator it = res.begin(); it != res.end(); it++) {
@@ -116,7 +110,6 @@ static double deal_with(vector<double> &res, stack<char> &opt) {
 		result = a / b;
 	else if (opteration == '*')
 		result = a * b;
-//	cout << "deal with: " << a << opteration << b << "=" << result << endl;
 	return result;
 }
 
@@ -126,7 +119,7 @@ static double cal_postfixExp() {
 	int len = raw.size();
 	stack<char> opt;
 	vector<double> res;
-	string tmp; //保存一个数
+	string tmp;
 	for (int i = 0; i < len; i++) {
 		if ((raw[i] >= '0' && raw[i] <= '9') || raw[i] == '.') {
 			if (i + 1 < len
@@ -142,7 +135,6 @@ static double cal_postfixExp() {
 			opt.push(raw[i]);
 		} else if (raw[i] == ')') {
 			while (!opt.empty() && opt.top() != '(') {
-				//todo 处理括号内容
 				double t = deal_with(res, opt);
 				res.push_back(t);
 			}
@@ -157,7 +149,6 @@ static double cal_postfixExp() {
 				if (get_level(raw[i]) > get_level(opt.top())) {
 					opt.push(raw[i]);
 				} else {
-					//todo 处理符号
 					double t = deal_with(res, opt);
 					res.push_back(t);
 					opt.push(raw[i]);
@@ -166,7 +157,6 @@ static double cal_postfixExp() {
 		}
 	}
 	while (!opt.empty()) {
-		//处理剩下的
 		double t = deal_with(res, opt);
 		res.push_back(t);
 	}
