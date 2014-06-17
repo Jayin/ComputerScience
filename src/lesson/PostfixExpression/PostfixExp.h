@@ -116,18 +116,18 @@ static double deal_with(vector<double> &res, stack<char> &opt) {
 		result = a / b;
 	else if (opteration == '*')
 		result = a * b;
-	cout << "deal with: " << a << opteration << b << "=" << result << endl;
+//	cout << "deal with: " << a << opteration << b << "=" << result << endl;
 	return result;
 }
 
-static double cal_postfixExp1() {
+//计算表达式的值
+static double cal_postfixExp() {
 	string raw = input();
 	int len = raw.size();
 	stack<char> opt;
 	vector<double> res;
 	string tmp; //保存一个数
 	for (int i = 0; i < len; i++) {
-		cout << "deal with: " << raw[i] << endl;
 		if ((raw[i] >= '0' && raw[i] <= '9') || raw[i] == '.') {
 			if (i + 1 < len
 					&& ((raw[i + 1] >= '0' && raw[i + 1] <= '9')
