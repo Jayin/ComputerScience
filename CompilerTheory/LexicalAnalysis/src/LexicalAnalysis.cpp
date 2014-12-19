@@ -40,6 +40,21 @@ string words[] = { "auto", "double", "int", "struct", "break", "else", "long",
 		"return", "union", "const", "float", "short", "unsigned", "continue",
 		"for", "signed", "void", "default", "goto", "sizeof", "volatile", "do",
 		"if", "static", "while" };
+//Token
+class Token {
+	int code; //种类码
+	std::string value; //标记符
+	int line; //行数
+public:
+	Token(int code, std::string value, int line) {
+		this->code = code;
+		this->line = line;
+		this->value = value;
+	}
+	std::string toString() {
+		return "( " + std::to_string(this->code) + " , " + this->value + ")";
+	}
+};
 
 void init() {
 	//符号表序号
@@ -136,6 +151,11 @@ void init() {
 	m["constant_string"] = 81;
 	//注释
 	m["comments"] = 82;
+}
+
+void createToken(string type,string){
+//outfile << "< num," << token << " >" << endl;
+	outfile << "< num," << token << " >" << endl;
 }
 int main() {
 	init();
