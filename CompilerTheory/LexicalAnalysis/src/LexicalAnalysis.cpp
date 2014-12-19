@@ -9,16 +9,19 @@
 #include <vector>
 #include <string>
 #include <cctype>
+#include <map>
 
 using namespace std;
 
+void init();
 void get_digits(); // 读取并识别实数
 bool get_comments(); // 读取并识别注释
-int table_insert();// 将标识符插入符号表
+int table_insert(); // 将标识符插入符号表
 
+map<string, int> m; //种类码
 bool notEnd = true;  // 循环标志变量
-int state  = 0;     // 有限自动机状态变量
-int line   = 0;  //  行数
+int state = 0;     // 有限自动机状态变量
+int line = 0;  //  行数
 int column = 0;  //  列数
 int cnt_word = 0; // 单词数
 int cnt_char = 0;  // 字符数
@@ -38,7 +41,104 @@ string words[] = { "auto", "double", "int", "struct", "break", "else", "long",
 		"for", "signed", "void", "default", "goto", "sizeof", "volatile", "do",
 		"if", "static", "while" };
 
+void init() {
+	//符号表序号
+	m["ID"] = 1;
+	//关键字种别码
+	m["auto"] = 2;
+	m["double"] = 3;
+	m["int"] = 4;
+	m["struct"] = 5;
+	m["break"] = 6;
+	m["else"] = 7;
+	m["long"] = 8;
+	m["switch"] = 9;
+	m["case"] = 10;
+	m["enum"] = 11;
+	m["register"] = 12;
+	m["typedef"] = 13;
+	m["char"] = 14;
+	m["extern"] = 15;
+	m["return"] = 16;
+	m["union"] = 17;
+	m["const"] = 18;
+	m["float"] = 19;
+	m["short"] = 20;
+	m["unsigned"] = 21;
+	m["continue"] = 22;
+	m["for"] = 23;
+	m["signed"] = 24;
+	m["void"] = 25;
+	m["default"] = 26;
+	m["goto"] = 27;
+	m["sizeof"] = 28;
+	m["volatile"] = 29;
+	m["do"] = 30;
+	m["if"] = 31;
+	m["static"] = 32;
+	m["while"] = 33;
+	m["number"] = 34;
+
+	//算数运算符
+	m["+"] = 35;
+	m["++"] = 36;
+	m["-"] = 37;
+	m["--"] = 38;
+	m["*"] = 39;
+	m["/"] = 40;
+	m["%"] = 41;
+	//赋值运算符
+	m["="] = 42;
+	m["+="] = 43;
+	m["-="] = 44;
+	m["*="] = 45;
+	m["/="] = 46;
+	m["%="] = 47;
+	m["&="] = 48;
+	m["|="] = 49;
+	m["^="] = 50;
+	//关系运算符
+	m["<"] = 51;
+	m["<="] = 52;
+	m["=="] = 53;
+	m[">="] = 54;
+	m[">"] = 55;
+	m["!="] = 56;
+	//逻辑运算符
+	m["&&"] = 57;
+	m["||"] = 58;
+	m["!"] = 59;
+	//位运算符
+	m["&"] = 60;
+	m["|"] = 61;
+	m["^"] = 62;
+	m["~"] = 63;
+	m["<<"] = 64;
+	m[">>"] = 65;
+	//其他符号(界限符号)
+	m["->"] = 66;
+	m["."] = 67;
+	m["#"] = 68;
+	m["{"] = 69;
+	m["}"] = 70;
+	m["["] = 71;
+	m["]"] = 72;
+	m["("] = 73;
+	m[")"] = 74;
+	m["?"] = 75;
+	m[":"] = 76;
+	m[","] = 77;
+	m[";"] = 78;
+	m["\\"] = 79;
+	//字符常量
+	m["constant_char"] = 80;
+	//字符串常量
+	m["constant_string"] = 81;
+	//注释
+	m["comments"] = 82;
+}
 int main() {
+	init();
 	set<string> keywords(words, words + 32);    // 关键字集合
 	char C;
 
@@ -89,7 +189,7 @@ int main() {
 				int i = 1;                          // 将符号表写入文件
 				for (vector<string>::iterator it = table.begin();
 						it != table.end(); ++it) {
-					tablefile <<  i++ << "\t" << *it << endl;
+					tablefile << i++ << "\t" << *it << endl;
 				}
 				tablefile.close();
 				cout << "总行数：" << line << endl;
@@ -169,10 +269,16 @@ int main() {
 					token.append(1, *forward_node++);
 					++column;
 				}
-				if (keywords.count(token) == 0) {                   // 查关键字表
-					outfile << "< ID," << table_insert() << " >" << endl;
+				if (keywords.count(token) == 0) {
+					// 查关键字表
+//					outfile << "< ID," << table_insert() << " > "<<m["ID"] << endl;
+					table_insert();
+					outfile << "< ID:" << m["ID"] << "," << token << " >"
+							<< endl;
 				} else {
-					outfile << "< key," << token << " >" << endl;
+//					outfile << "< key," << token << " >" << endl;
+					outfile << "< key:" << m[token] << "," << token << " >"
+							<< endl;
 				}
 				++cnt_word;
 				break;
@@ -203,18 +309,26 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< arith-op," << token << " >" << endl;
+//					outfile << "< arith-op," << token << " >" << endl;
+					outfile << "< arith-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '+') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< arith-op," << token << " >" << endl;
+//						outfile << "< arith-op," << token << " >" << endl;
+						outfile << "< arith-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << "," << token << " >"
+								<< endl;
 					} else {
-						outfile << "< arith-op," << token << " >" << endl;
+//						outfile << "< arith-op," << token << " >" << endl;
+						outfile << "< arith-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -225,22 +339,31 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< arith-op," << token << " >" << endl;
+//					outfile << "< arith-op," << token << " >" << endl;
+					outfile << "< arith-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '-') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< arith-op," << token << " >" << endl;
-					} else if (*forward_node == '=') {
+//						outfile << "< arith-op," << token << " >" << endl;
+						outfile << "< arith-op:" << m[token] << "," << token
+								<< " >" << endl;
+					} else if (*forward_node == '=') { // -=
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
-					} else if (*forward_node == '>') {
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
+					} else if (*forward_node == '>') {  // ->
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< others," << token << " >" << endl;
+//						outfile << "< others," << token << " >" << endl;
+						outfile << "< others:" << m[token] << "," << token << " >" << endl;
 					} else {
-						outfile << "< arith-op," << token << " > " << endl;
+//						outfile << "< arith-op," << token << " > " << endl;
+						outfile << "< arith-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -251,14 +374,20 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< arith-op," << token << " >" << endl;
+//					outfile << "< arith-op," << token << " >" << endl;
+					outfile << "< arith-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
-					if (*forward_node == '=') {
+					if (*forward_node == '=') {  // *=
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
 					} else {
-						outfile << "< arith-op," << token << " >" << endl;
+//						outfile << "< arith-op," << token << " >" << endl;
+						outfile << "< arith-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -269,13 +398,17 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< arith-op," << token << " >" << endl;   // 行末除号
+//					outfile << "< arith-op," << token << " >" << endl;   // 行末除号
+					outfile << "< arith-op:" << m[token] << "," << token << " >"
+							<< endl;
 					++cnt_word;
 				} else {
-					if (*forward_node == '=') {                        // 除法复合赋值 /=
+					if (*forward_node == '=') {                     // 除法复合赋值 /=
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
 						++cnt_word;
 					} else if (*forward_node == '/') {              // 单行注释，读到行末
 						token.append(1, *forward_node++);
@@ -284,13 +417,15 @@ int main() {
 							token.append(1, *forward_node++);
 							++column;
 						}
-						outfile << "< comments," << token<<"- >" << endl;
+//						outfile << "< comments," << token << "- >" << endl;
+						outfile << "< comments:" << m["comments"] << "," << token << " >" << endl;
 					} else if (*forward_node == '*') {               // 多行注释可以换行
 						token.append(1, *forward_node++);
 						++column;
 						int ret = get_comments();
 						if (ret) {
-							outfile << "< comments," << token << "- >" << endl;
+//							outfile << "< comments," << token << "- >" << endl;
+							outfile << "< comments:" << m["comments"] << "," << token << " >" << endl;
 						} else {
 							infile.close();
 							outfile.close();
@@ -306,7 +441,9 @@ int main() {
 							return 0;
 						}
 					} else {                                   // 除号后是其他字符，为单个除号
-						outfile << "< arith-op," << token << " >" << endl;
+//						outfile << "< arith-op," << token << " >" << endl;
+						outfile << "< arith-op:" << m[token] << "," << token
+								<< " >" << endl;
 						++cnt_word;
 					}
 				}
@@ -317,14 +454,20 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< arith-op," << token << " >" << endl;
+//					outfile << "< arith-op," << token << " >" << endl;
+					outfile << "< arith-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
 					} else {
-						outfile << "< arith-op," << token << " >" << endl;
+//						outfile << "< arith-op," << token << " >" << endl;
+						outfile << "< arith-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -335,18 +478,26 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< bit-op," << token << " >" << endl;
+//					outfile << "< bit-op," << token << " >" << endl;
+					outfile << "< bit-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
 					} else if (*forward_node == '&') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< log-op," << token << " >" << endl;
+//						outfile << "< log-op," << token << " >" << endl;
+						outfile << "< log-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else {
-						outfile << "< bit-op," << token << " >" << endl;
+//						outfile << "< bit-op," << token << " >" << endl;
+						outfile << "< bit-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -357,18 +508,26 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< bit-op," << token << " >" << endl;
+//					outfile << "< bit-op," << token << " >" << endl;
+					outfile << "< bit-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
 					} else if (*forward_node == '|') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< log-op," << token << " >" << endl;
+//						outfile << "< log-op," << token << " >" << endl;
+						outfile << "< log-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else {
-						outfile << "< bit-op," << token << " >" << endl;
+//						outfile << "< bit-op," << token << " >" << endl;
+						outfile << "< bit-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -379,14 +538,20 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< bit-op," << token << " >" << endl;
+//					outfile << "< bit-op," << token << " >" << endl;
+					outfile << "< bit-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
 					} else {
-						outfile << "< bit-op," << token << " >" << endl;
+//						outfile << "< bit-op," << token << " >" << endl;
+						outfile << "< bit-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -396,7 +561,9 @@ int main() {
 				token.append(1, C);
 				++forward_node;
 				++column;
-				outfile << "< bit-op," << token << " >" << endl;
+//				outfile << "< bit-op," << token << " >" << endl;
+				outfile << "< bit-op:" << m[token] << "," << token << " >"
+						<< endl;
 				++cnt_word;
 				break;
 
@@ -405,18 +572,26 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< rel-op," << token << " >" << endl;
+//					outfile << "< rel-op," << token << " >" << endl;
+					outfile << "< rel-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< rel-op," << token << " >" << endl;
+//						outfile << "< rel-op," << token << " >" << endl;
+						outfile << "< rel-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else if (*forward_node == '<') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< bit-op," << token << " >" << endl;
+//						outfile << "< bit-op," << token << " >" << endl;
+						outfile << "< bit-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else {
-						outfile << "< rel-op," << token << " >" << endl;
+//						outfile << "< rel-op," << token << " >" << endl;
+						outfile << "< rel-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -427,14 +602,20 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< asgn-op," << token << " >" << endl;
+//					outfile << "< asgn-op," << token << " >" << endl;
+					outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< rel-op," << token << " >" << endl;
+//						outfile << "< rel-op," << token << " >" << endl;
+						outfile << "< rel-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else {
-						outfile << "< asgn-op," << token << " >" << endl;
+//						outfile << "< asgn-op," << token << " >" << endl;
+						outfile << "< asgn-op:" << m[token] << ","  << token << " >"
+								<< endl;
 					}
 				}
 				++cnt_word;
@@ -445,18 +626,26 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< rel-op," << token << " >" << endl;
+//					outfile << "< rel-op," << token << " >" << endl;
+					outfile << "< rel-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< rel-op," << token << " >" << endl;
+//						outfile << "< rel-op," << token << " >" << endl;
+						outfile << "< rel-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else if (*forward_node == '>') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< bit-op," << token << " >" << endl;
+//						outfile << "< bit-op," << token << " >" << endl;
+						outfile << "< bit-op:" << m[token] << "," << token
+								<< " >" << endl;
 					} else {
-						outfile << "< rel-op," << token << " >" << endl;
+//						outfile << "< rel-op," << token << " >" << endl;
+						outfile << "< rel-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -467,14 +656,20 @@ int main() {
 				++forward_node;
 				++column;
 				if (forward_node == buffer.end()) {
-					outfile << "< log-op," << token << " >" << endl;
+//					outfile << "< log-op," << token << " >" << endl;
+					outfile << "< log-op:" << m[token] << "," << token << " >"
+							<< endl;
 				} else {
 					if (*forward_node == '=') {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< rel-op," << token << " >" << endl;
+//						outfile << "< rel-op," << token << " >" << endl;
+						outfile << "< rel-op:" << m[token] << token << " >"
+								<< endl;
 					} else {
-						outfile << "< log-op," << token << " >" << endl;
+//						outfile << "< log-op," << token << " >" << endl;
+						outfile << "< log-op:" << m[token] << "," << token
+								<< " >" << endl;
 					}
 				}
 				++cnt_word;
@@ -506,7 +701,8 @@ int main() {
 					} else {
 						token.append(1, *forward_node++);
 						++column;
-						outfile << "< string," << token << " >" << endl;
+//						outfile << "< string," << token << " >" << endl;
+						outfile << "< constant_string " << m["constant_string"] << "," << token << " >" << endl;
 						break;
 					}
 				}
@@ -535,7 +731,8 @@ int main() {
 				} else {
 					token.append(1, *forward_node++);
 					++column;
-					outfile << "< char," << "- >" << endl;
+//					outfile << "< char," << "- >" << endl;
+					outfile << "< constant_char:" << m["constant_char"] << "," << token << "- >" << endl;
 				}
 				++cnt_word;
 				break;
@@ -555,7 +752,8 @@ int main() {
 					++cnt_word;
 					break;
 				}
-				outfile << "< others," << token << " >" << endl;
+//				outfile << "< others," << token << " >" << endl;
+				outfile << "< others:" << m[token] << "," << token << " >" << endl;
 				++cnt_word;
 				break;
 
@@ -574,7 +772,8 @@ int main() {
 				token.append(1, C);
 				++forward_node;
 				++column;
-				outfile << "< others," << token << " >" << endl;
+//				outfile << "< others," << token << " >" << endl;
+				outfile << "< others:" << m[token] << "," << token << " >" << endl;
 				++cnt_word;
 				break;
 
