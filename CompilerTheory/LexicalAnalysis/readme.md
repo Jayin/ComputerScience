@@ -9,7 +9,7 @@ C语言词法分析
 Usage
 ---
 ```shell
-$ g++ LexicalAnalysis.cpp -0 lex
+$ g++ LexicalAnalysis.cpp -o lex
 $ lex in.c tokens.txt table.txt //分别指定输入文件，输出token串文件，符号表文件
 ```
 
