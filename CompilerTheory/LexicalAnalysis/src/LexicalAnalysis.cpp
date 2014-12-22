@@ -210,33 +210,17 @@ int main(int argc, char *argv[]) {
 	set<string> keywords(words, words + 32);    // 关键字集合
 	char C;
 
-//	cout << "输入源文件（回车默认使用in.c）：" << endl;
-//	getline(cin, ifile);
-//	if (ifile == "") {
-//		ifile = "in.c";               // 回车默认
-//	}
 	infile.open(file_input);
 	if (!infile) {
 		cout << "无法打开源文件！" << endl;
 		return -1;
 	}
-//
-//	cout << "输出目标文件（回车默认使用out.txt）：" << endl;
-//	getline(cin, ofile);
-//	if (ofile == "") {
-//		ofile = "out.txt";    // 回车默认
-//	}
 	outfile.open(file_output_token);
 	if (!outfile) {
 		cout << "无法创建目标文件！" << endl;
 		return -1;
 	}
 
-//	cout << "输出符号表（回车默认使用table.txt）：" << endl;
-//	getline(cin, tfile);
-//	if (tfile == "") {
-//		tfile = "table.txt";
-//	}
 	tablefile.open(file_output_table);
 	if (!tablefile) {
 		cout << "无法创建符号表！" << endl;
