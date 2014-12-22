@@ -25,3 +25,5 @@ Makefile.win
 .settings
 
 /Debug
+
+.idea/
