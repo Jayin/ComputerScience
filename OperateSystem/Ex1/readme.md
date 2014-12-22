@@ -2,3 +2,11 @@
 ---
 
 details : https://github.com/Jayin/jayin.github.io/issues/38
+
+Test
+---
+
+```shell
+cd Test
+python SellTest.py
+```
