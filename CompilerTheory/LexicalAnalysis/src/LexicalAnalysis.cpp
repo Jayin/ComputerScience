@@ -184,8 +184,8 @@ void createToken(string type, string token, int line) {
 
 		tokens.push_back(Token(m["constant_string"], token, line));
 	} else if (type.compare("comments") == 0) {
-
-		tokens.push_back(Token(m["comments"], token, line));
+//		不要注释
+//		tokens.push_back(Token(m["comments"], token, line));
 	} else {
 		tokens.push_back(Token(m[token], token, line));
 	}
@@ -767,8 +767,8 @@ int table_insert() {
 	}
 	return distance(table.begin(), it) + 1;
 }
-
-void get_digits()                                            // 读取实数，包含E/e指数
+// 读取实数，包含E/e指数
+void get_digits()
 {
 	while ((forward_node != buffer.end()) && notEnd) {
 		switch (state) {
