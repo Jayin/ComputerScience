@@ -16,6 +16,7 @@ def main(n=None):
             print ans.values()
             global total
             total += 1
+            return
 
         for x in range(1, n + 1):
             if not vis[x]:
