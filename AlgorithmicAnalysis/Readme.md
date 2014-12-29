@@ -12,3 +12,8 @@ Test
 ```shell
 python {Experiment}/test.py
 ```
+
+Requirement
+---
+
+python 2.7.x
