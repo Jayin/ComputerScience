@@ -1,5 +1,12 @@
 编译原理
 ---
 
-* LexicalAnalysis 
+LexicalAnalysis
+--
 >词法分析器
+
+
+Requirement
+---
+
+C++ 11
