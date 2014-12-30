@@ -39,7 +39,6 @@ def main(n=None):
     def work(cur, step):
         if step == n + 1 :
             if cur == 'a':
-                # print(ans)
                 print_ans()
                 global total
                 total += 1

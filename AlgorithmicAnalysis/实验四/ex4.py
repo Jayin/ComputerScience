@@ -29,8 +29,6 @@ def main(c=None, s=None, n=None, w=None, t=None, v=None):
             if cur_v > ans :
                 ans = cur_v
                 ans_list = copy.deepcopy(tmp_list)
-                # print(ans_list)
-                # print(ans)
         else:
             for x in [0, 1]:
                 if x == 1:
