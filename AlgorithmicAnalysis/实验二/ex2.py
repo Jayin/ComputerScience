@@ -45,7 +45,6 @@ def main(n=None):
         else:
             for c in ['a', 'b', 'c']:
                 tmp = cur
-                # x * y
                 ans.append(c)
 
                 work(table[cur][c], step + 1)

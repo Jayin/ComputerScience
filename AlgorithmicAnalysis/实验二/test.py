@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 __author__ = 'jayin'
 
-from . import ex2, ex2s
+import ex2
 
 ex2.main(3)
-ex2s.main(3)
 
-ex2.main(4)
-ex2s.main(4)
+ex2.main(5)
 
